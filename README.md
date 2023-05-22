@@ -12,4 +12,5 @@ Language: C#
 Renderer: Compatibility
 
 # Screenshots
-To Be Added
+![No entities](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/empty.png)
+![Fifteen thousand entities](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/15k.png)
