@@ -9,7 +9,7 @@ A large portion of the code used was adapted from [Arch's MonoGame-based sample]
 
 Language: C#
 
-Renderer: Forward+
+Renderer: Compatibility
 
 # Screenshots
 To Be Added
