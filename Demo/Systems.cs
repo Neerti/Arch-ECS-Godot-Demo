@@ -81,14 +81,13 @@ public class MovementSystem : SystemBase<double>
 	
 	public override void Update(in double time)
 	{
-		// Unfortunately, Godot doesn't seem to be able to handle InlineParallelQuery(), which will cost some performance.
+		// A JobScheduler is required for these to work.
+		// InlineQuery can be used as a non-parallel alternative if desired. 
 		var movementJob = new Move((float)time);
-		//World.InlineParallelQuery<Move, Position, Velocity>(in _entitiesToMove, ref movementJob);
-		World.InlineQuery<Move, Position, Velocity>(in _entitiesToMove, ref movementJob);
-		
+		World.InlineParallelQuery<Move, Position, Velocity>(in _entitiesToMove, ref movementJob);
+
 		var bounceJob = new Bounce(_viewport);
-		//World.InlineParallelQuery<Bounce, Position, Velocity>(in _entitiesToMove, ref bounceJob);
-		World.InlineQuery<Bounce, Position, Velocity>(in _entitiesToMove, ref bounceJob);
+		World.InlineParallelQuery<Bounce, Position, Velocity>(in _entitiesToMove, ref bounceJob);
 	}
 	
 	

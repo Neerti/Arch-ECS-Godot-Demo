@@ -13,7 +13,7 @@ config_version=5
 config/name="ArchDemo"
 config/description="A Godot demo that uses Arch ECS."
 run/main_scene="res://demo.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]

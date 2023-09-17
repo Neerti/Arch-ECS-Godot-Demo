@@ -11,10 +11,13 @@ public partial class EntityRenderer : Node2D
 	// ECS Systems.
 	private MovementSystem _movementSystem;
 	private ColorSystem _colorSystem;
+
+	// Required for parallel queries.
+	private JobScheduler.JobScheduler _jobScheduler;
 	
 	// Sprite that represents each entity.
 	public Texture2D EntityTexture;
-	
+
 
 	/// <summary>
 	/// Adds the specified number of entities, with all components populated with random values.
@@ -53,6 +56,9 @@ public partial class EntityRenderer : Node2D
 		World = World.Create();
 		_movementSystem = new MovementSystem(World, new Rect2I(0, 0, GetTree().Root.Size));
 		_colorSystem = new ColorSystem(World);
+		
+		// Parallel setup
+		_jobScheduler = new("SampleWorkerThreads");
 
 		EntityTexture = GD.Load<Texture2D>("res://Sprite.png");
 
