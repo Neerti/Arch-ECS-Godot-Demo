@@ -13,4 +13,5 @@ Renderer: Compatibility
 
 # Screenshots
 ![No entities](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/empty.png)
-![Fifteen thousand entities](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/15k.png)
+![Thirty thousand entities at one hundred and fourty frames per second](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/30k.png)
+![Sixty thousand entities at 60 frames per second](https://raw.githubusercontent.com/Neerti/Arch-ECS-Godot-Demo/main/Screenshots/60k.png)
