@@ -37,6 +37,7 @@ public partial class EntityRenderer : Node2D
 				new Sprite {SpriteColor = new Color(GD.Randf(), GD.Randf(), GD.Randf())}
 			);
 		}
+		GetNode<MultiMeshInstance2D>("MultiMeshInstance2D").Multimesh.InstanceCount += amount;
 	}
 
 	/// <summary>
@@ -45,6 +46,7 @@ public partial class EntityRenderer : Node2D
 	public void ClearEntities()
 	{
 		World.Clear();
+		GetNode<MultiMeshInstance2D>("MultiMeshInstance2D").Multimesh.InstanceCount = 0;
 	}
 
 	// Godot methods.
@@ -77,31 +79,29 @@ public partial class EntityRenderer : Node2D
 			value => Engine.PhysicsTicksPerSecond = (int) value;
 	}
 	
-	// Called every frame. In the demo, this is required for manual drawing.
+	// Called every frame. In the demo, this is required for updating the MultiMesh.
 	public override void _Process(double delta)
 	{
-		QueueRedraw();
+		var desc = new QueryDescription().WithAll<Position, Sprite>();
+		var multimesh = GetNode<MultiMeshInstance2D>("MultiMeshInstance2D").Multimesh;
+
+		var i = 0;
+		World.Query(in desc, (ref Position pos, ref Sprite sp) =>
+		{
+			multimesh.SetInstanceTransform2D(i, new Transform2D(0f, pos.Vec2));
+			multimesh.SetInstanceColor(i, sp.SpriteColor);
+			i++;
+		});
 	}
 	
-	// Called by default 60 times a second, and is decoupled from FPS. In the demo,
-	// the interval can be changed in the UI.
+	// Called by default 60 times a second, and is decoupled from FPS. 
+	// In the demo, the interval can be changed in the UI.
 	public override void _PhysicsProcess(double delta)
 	{
 		// Systems are updated at a constant rate,
 		// but they could also be tied to FPS by updating them in _Process() instead.
 		_movementSystem.Update(delta);
 		_colorSystem.Update(delta);
-	}
-	
-	// Called every frame, and manually draws each entity.
-	public override void _Draw()
-	{
-		var desc = new QueryDescription().WithAll<Position, Sprite>();
-
-		World.Query(in desc, (ref Position pos, ref Sprite sp) =>
-		{
-			DrawTexture(EntityTexture, pos.Vec2, sp.SpriteColor);
-		});
 	}
 }
 

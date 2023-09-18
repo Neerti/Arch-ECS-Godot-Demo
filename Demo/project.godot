@@ -24,7 +24,3 @@ window/vsync/vsync_mode=0
 [dotnet]
 
 project/assembly_name="ArchDemo"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
